@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>툴킷 대시보드</title>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Square+Round:wght@400;700;800&display=swap" rel="stylesheet">
 <style>
@@ -31,7 +32,7 @@ html, body { height: 100%; font-family: "NanumSquareRound", sans-serif; backgrou
 }
 
 /* ── 전체 레이아웃 ── */
-.app { display: flex; flex-direction: column; height: 100vh; }
+.app { display: flex; flex-direction: column; height: 100vh; height: 100dvh; }
 .body { display: flex; flex: 1; overflow: hidden; min-height: 0; }
 
 /* ── 기본 틀 ── */
@@ -647,6 +648,14 @@ function fitNoticeFont() {
 window.addEventListener('resize', () => { applyLayout(); fitNoticeFont();
 fitDatetimeFont();
 fitWeatherFont(); fitDatetimeFont(); });
+
+// iPad Safari: 주소창/도구바 표시 여부에 따라 visualViewport가 더 정확하게 반응
+if (window.visualViewport) {
+  window.visualViewport.addEventListener('resize', () => {
+    applyLayout(); fitNoticeFont(); fitDatetimeFont(); fitWeatherFont();
+  });
+}
+
 applyLayout();
 fitNoticeFont();
 fitDatetimeFont();
